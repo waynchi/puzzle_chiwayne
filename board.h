@@ -2,8 +2,13 @@
 #define BOARD_H
 
 #include <iostream>
+#include <iomanip>
 #include <map>
 #include <functional>
+#include <stdio.h>      /* printf, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+#include <cmath>
 
 class Board
 {
@@ -27,6 +32,9 @@ class Board
 
   /** Swaps the blank with the specified tile */
   void move(int tile);
+  
+  //Prints out the current board
+  void printBoard();
 
   /** Generate potential moves and returns new boards
    * Key=tile, Value=Ptr to corresponding Board */
@@ -34,6 +42,10 @@ class Board
 
   /** Returns true if the board is solved, false otherwise */
   bool solved();
+  //Note 1: STL Classes may only be used where explicitly stated.
+//Note 2: Use Doxygen style comments in all of your classes
+//Note 3: Although no points are dedicated to the proper use of git & GitHub, submissions not following the workflow will be penalized. That includes the proper closing of issues on your private tracker.
+
 
   // Operators
   friend std::ostream& operator<<(std::ostream &os, const Board &b);
@@ -63,6 +75,7 @@ struct BoardLessThan :
     return *b1 < *b2;
   }
 };
+
 
 
 
