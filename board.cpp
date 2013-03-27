@@ -69,7 +69,7 @@ Board::Board()
 {
   size_ = 9;
   tiles_ = new int[size_];
-  int dim = static_cast<int>(sqrt(size_));
+  //int dim = static_cast<int>(sqrt(size_));
   srand(1);
   for(int i=0; i < size_; i++){
     tiles_[i] = i;
@@ -175,18 +175,22 @@ void Board::move(int tile)
 	{
 		neighbors[0] = tiles_[temp-dim];
 	}
+	else{neighbors[0] = -1;}
 	if ((temp+1)%dim != 0)
 	{
 		neighbors[1] = tiles_[temp+1];
 	}
+	else{neighbors[1] = -1;}
 	if (temp%dim != 0)
 	{
 		neighbors[2] = tiles_[temp-1];
 	}
+	else{neighbors[2] = -1;}
 	if (temp < (size_ - dim))
 	{
 		neighbors[3] = tiles_[temp+dim];
 	}
+	else{neighbors[3] = -1;}
 	for (int j = 0; j < 4; j++)
 	{
 		if(neighbors[j] == 0)
@@ -198,6 +202,50 @@ void Board::move(int tile)
 	}
 }
 
+std::map<int, Board*> Board::potentialMoves()
+{
+	int tempzero = 0;
+	int dim = static_cast<int>(sqrt(size_));
+	int neighbors[4];
+	map<int, Board*> BoardList;
+	for (int a = 0; a <size_; a++)
+	{
+		if(tiles_[a] == 0)
+		{ tempzero = a; 
+		break;}
+	}
+	if (tempzero >= dim)
+	{
+		neighbors[0] = tiles_[tempzero-dim];
+	}
+	else{neighbors[0] = -1;}
+	if ((tempzero+1)%dim != 0)
+	{
+		neighbors[1] = tiles_[tempzero+1];
+	}
+	else{neighbors[1] = -1;}
+	if (tempzero%dim != 0)
+	{
+		neighbors[2] = tiles_[tempzero-1];
+	}
+	else{neighbors[2] = -1;}
+	if (tempzero < (size_ - dim))
+	{
+		neighbors[3] = tiles_[tempzero+dim];
+	}
+	else{neighbors[3] = -1;}
+	for (int j = 0; j < 4; j++)
+	{
+		Board *tempBoard = new Board(tiles_, size_);
+		if(neighbors[j]!=-1){
+			tempBoard->move(neighbors[j]);
+			BoardList[neighbors[j]] = tempBoard;
+		}
+				
+	}
+	return BoardList;
+}
+	
 bool Board::solved()
 {
 	int count = 0;
