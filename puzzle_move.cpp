@@ -1,15 +1,15 @@
 #include "puzzle_move.h"
+#include <iostream>
 
+using namespace std;
 // Constructor for starting Board of an A* search
 PuzzleMove::PuzzleMove(Board &b)
 {
-	PuzzleHeuristic *heur;
 	tileMove_ = 0;
 	prev_ = NULL;
 	b_ = new Board(b);
 	g_ = 0;
-	heur = new ManhattanHeuristic();
-	h_ = heur->compute(b_->getTiles(), b_->getSize());
+	h_ = -1;
 }
   	
 
@@ -17,18 +17,16 @@ PuzzleMove::PuzzleMove(Board &b)
   // (i.e. those returned by Board::potentialMoves() )
 PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *parent)
 {
-	PuzzleHeuristic *heur;
 	tileMove_ = tile;
 	prev_ = parent;
 	b_ = b;
 	g_ = (parent->g_)+1;
-	heur = new ManhattanHeuristic();
-	h_ = heur->compute(b_->getTiles(), b_->getSize());
+	h_ = -1;
 }
 
   // Destructor
 PuzzleMove::~PuzzleMove()
-{delete b_;}
+{delete prev_;}
 
   // Compare to PuzzleMoves based on f distance 
 bool PuzzleMove::operator==(const PuzzleMove& p) const

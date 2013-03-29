@@ -32,10 +32,13 @@ class PuzzleSolver
 
   // Return how many expansions were performed in the search
   int getNumExpansions();
+  
+  mylist<int>& getSequence();
 
  private:
-  Board b_;
+  Board *b_;
   int expansions_;
+  mylist<int> sequence;
   //**** Declare a List to store your solutions sequence of tiles to move
 };
 

@@ -17,17 +17,18 @@ int OutofPlaceHeuristic::compute(int *tiles, int size)
  return h_;
 }
 
+
+
 int ManhattanHeuristic::compute(int *tiles, int size)
 {
  int h_ = 0;
  int dim = static_cast<int>(sqrt(size));
- int count = 0;
+ int count = 0; 
+ 
  for (int i = 0; i < size; i++)
  {
   int temp = tiles[i];
-  if(temp == 0)
-  {}
-  else{
+  if(temp != 0){
   if(temp < i){
    while (temp != i)
    {
