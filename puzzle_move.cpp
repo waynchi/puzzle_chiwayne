@@ -8,14 +8,6 @@ PuzzleMove::PuzzleMove(Board &b)
 	prev_ = NULL;
 	b_ = new Board(b);
 	g_ = 0;
-	/*int count = 0;
-	calculating h_
-	for (int i = 0; i < b.getSize(); i++)
-	{
-	if (b.getTiles()[i] != i)
-		count++;
-	}  	
-	h_ = count;*/
 	heur = new ManhattanHeuristic();
 	h_ = heur->compute(b_->getTiles(), b_->getSize());
 }
@@ -30,14 +22,6 @@ PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *parent)
 	prev_ = parent;
 	b_ = b;
 	g_ = (parent->g_)+1;
-	/*int count = 0;
-	calculating h_
-	for (int i = 0; i < b->getSize(); i++)
-	{
-	if (b->getTiles()[i] != i)
-		count++;
-	}  	
-	h_ = count;*/
 	heur = new ManhattanHeuristic();
 	h_ = heur->compute(b_->getTiles(), b_->getSize());
 }
