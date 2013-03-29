@@ -8,6 +8,20 @@ class PuzzleHeuristic
   virtual int compute(int *tiles, int size) = 0;
 };
 
+class ManhattanHeuristic : public PuzzleHeuristic
+{
+ public:
+  int compute(int *tiles, int size);
+};
+
+class OutofPlaceHeuristic : public PuzzleHeuristic
+{
+ public:
+  int compute(int *tiles, int size);
+};
+  
+
+
 
 // Define actual Heuristic Classes here
 
