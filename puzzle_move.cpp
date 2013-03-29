@@ -3,18 +3,21 @@
 // Constructor for starting Board of an A* search
 PuzzleMove::PuzzleMove(Board &b)
 {
+	PuzzleHeuristic *heur;
 	tileMove_ = 0;
 	prev_ = NULL;
 	b_ = new Board(b);
 	g_ = 0;
-	int count = 0;
-	//calculating h_
+	/*int count = 0;
+	calculating h_
 	for (int i = 0; i < b.getSize(); i++)
 	{
 	if (b.getTiles()[i] != i)
 		count++;
 	}  	
-	h_ = count;
+	h_ = count;*/
+	heur = new ManhattanHeuristic();
+	h_ = heur->compute(b_->getTiles(), b_->getSize());
 }
   	
 
@@ -22,18 +25,21 @@ PuzzleMove::PuzzleMove(Board &b)
   // (i.e. those returned by Board::potentialMoves() )
 PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *parent)
 {
+	PuzzleHeuristic *heur;
 	tileMove_ = tile;
 	prev_ = parent;
 	b_ = b;
 	g_ = (parent->g_)+1;
-	int count = 0;
-	//calculating h_
+	/*int count = 0;
+	calculating h_
 	for (int i = 0; i < b->getSize(); i++)
 	{
 	if (b->getTiles()[i] != i)
 		count++;
 	}  	
-	h_ = count;
+	h_ = count;*/
+	heur = new ManhattanHeuristic();
+	h_ = heur->compute(b_->getTiles(), b_->getSize());
 }
 
   // Destructor
