@@ -23,14 +23,33 @@ int main(int argc, char *argv[])
   seed = atoi(argv[3]);
 
   Board b(size,initMoves,seed);
+    PuzzleHeuristic *pm = new ManhattanHeuristic();
+  
   int input;
   while(!b.solved())
   {
   b.printBoard();
-  cout << "Please enter the number you would like to move" << endl;
+  cout << "Please enter the number you would like to move. Enter -1 if you would like a cheat." << endl;
   cin >> input;
-  b.move(input);
+  if(input == -1)
+  {
+   PuzzleSolver solver(b);
+   int count = solver.run(pm);
+   cout << "Number of Expansions:" << solver.getNumExpansions() << endl;
+   cout << "Sequence: ";
+   cout << count << endl;
+   cout << solver.getSequence().size() << endl;
+   for(int j = (count-1); j >=0; j--)
+   {
+    cout << solver.getSequence().at(j) << " ";
+   }
+   cout << " " << endl;
   }
+  else
+  {
+   b.move(input);
+  }
+    }
   b.printBoard();
   cout << "Congratulations! You've solved the puzzle!" << endl;
 
