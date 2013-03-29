@@ -5,6 +5,7 @@
 #include "puzzle_solver.h"
 #include "pmminlist.h"
 #include "puzzle_move.h"
+#include <vector>
 
 using namespace std;
 
@@ -38,18 +39,18 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 {
  int count = 0;
  PMMinList openlist;
- PMMinList garbage;
+ vector<PuzzleMove*> garbage;
  BoardSet closedlist;
  PuzzleMove *a = new PuzzleMove(*b_);
  a->h_ = ph->compute(a->b_->getTiles(), a->b_->getSize());
  openlist.push(a);
  closedlist.insert(a->b_);
+  garbage.push_back(a);
  while(!(openlist.empty()))
  {
   PuzzleMove *move = new PuzzleMove(*openlist.top());
   move->h_ = ph->compute(move->b_->getTiles(), move->b_->getSize());
   openlist.pop();
-  garbage.push(move);
   closedlist.insert(move->b_);
   if(move->h_ == 0)
   {  
@@ -69,9 +70,10 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
    {
     PuzzleMove *temp = new PuzzleMove(it->first, it->second, move);
     temp->h_ = ph->compute(temp->b_->getTiles(), temp->b_->getSize());
-    garbage.push(temp);
+
     if(closedlist.find(temp->b_) == closedlist.end())
     {
+     garbage.push_back(temp);
      openlist.push(temp);
      closedlist.insert(temp->b_);
      expansions_++;
@@ -79,10 +81,18 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
    }
   }
  }
- for(int i = 0; i < garbage.size(); i++)
+ 
+ for(unsigned int i = 0; i < garbage.size(); i++)
  {
-  garbage.pop();
+ 	delete garbage[i];
  }
+ /*for(int j = 0; j < openlist.size(); j++)
+ {
+ 	PuzzleMove *temppuzzle;
+ 	temppuzzle = openlist.top();
+ 	openlist.pop();
+ 	delete temppuzzle;
+ }*/
  return count;
 }
 
