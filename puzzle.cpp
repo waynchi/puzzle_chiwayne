@@ -4,6 +4,7 @@
 #include "board.h"
 #include "puzzle_heur.h"
 #include "puzzle_solver.h"
+#include "pmminlist.h"
 
 using namespace std;
 
@@ -35,6 +36,35 @@ int main(int argc, char *argv[])
 
 
   //**** Implement the gameplay here
+  
+ //Used this to test PMMinlist
+ 
+ /*Board a(9,5,200);
+ Board b(9,15,200);
+ Board c(9,20,200);
+ Board d(9,35,200);
+ Board e(9,1,200);
+
+ PuzzleMove *v = new PuzzleMove(a);
+ PuzzleMove *w = new PuzzleMove(b);
+ PuzzleMove *x = new PuzzleMove(c);
+ PuzzleMove *y = new PuzzleMove(d);
+ PuzzleMove *z = new PuzzleMove(e);
+
+ PMMinList mlist; 
+
+ mlist.push(v);
+ mlist.push(w);
+ mlist.push(x);
+ mlist.push(y);
+ mlist.push(z);
+ 
+ for(int i = 0 ; i < 5; i++)
+ {
+  cout << (mlist.top()->g_ + mlist.top()->h_) << endl;
+  mlist.pop();
+ }*/
+ 
 
 
 

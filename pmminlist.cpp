@@ -1,6 +1,8 @@
 #include "puzzle_move.h"
 #include "pmminlist.h"
+#include <iostream>
 
+using namespace std;
 /**
  * Default Constructor
  */
@@ -25,17 +27,41 @@ PMMinList::~PMMinList()
  */
 void PMMinList::push(PuzzleMove* pm)
 {
-  std::list<PuzzleMove*>::iterator it = slist_.begin();
+  list<PuzzleMove*>::iterator it = slist_.begin();
+  it = slist_.begin();
+  while(true)
+  {
+   if (it == slist_.end())
+   {
+  	slist_.push_back(pm);
+  	break;
+   }
+   else if(**it > *pm)
+   {
+  	slist_.insert(it, pm);
+  	break;
+   }
+   it++;
+  }
+  /*for(it = slist_.begin(); it != slist_.end(); it++)
+  {
+	if (*it > pm)
+  	{
+  		slist_.insert(it, pm);
+  	}
+  }
+  if (it == slist_.end())
+  {
+  	slist_.push_back(pm);
+  }*/
+}
+  			
  
   //---- Add your implementation to iterate through the list
   //---- to find the correct location to insert pm and then
   //---- use the insert() method of std::List to insert it
   //---- See http://www.cplusplus.com/reference/list/list/insert/
 
-
-
-
-}
 
 /**
  * Adds the value val to the internal list in sorted
