@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
   seed = atoi(argv[3]);
 
   Board b(size,initMoves,seed);
-    PuzzleHeuristic *pm = new ManhattanHeuristic();
+  PuzzleHeuristic *pm = new ManhattanHeuristic();
   
   int input;
   while(!b.solved())
@@ -37,8 +37,6 @@ int main(int argc, char *argv[])
    int count = solver.run(pm);
    cout << "Number of Expansions:" << solver.getNumExpansions() << endl;
    cout << "Sequence: ";
-   cout << count << endl;
-   cout << solver.getSequence().size() << endl;
    for(int j = (count-1); j >=0; j--)
    {
     cout << solver.getSequence().at(j) << " ";
@@ -52,6 +50,7 @@ int main(int argc, char *argv[])
     }
   b.printBoard();
   cout << "Congratulations! You've solved the puzzle!" << endl;
+  delete pm;
 
 
   //**** Implement the gameplay here

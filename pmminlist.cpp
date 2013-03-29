@@ -31,6 +31,10 @@ void PMMinList::push(PuzzleMove* pm)
   it = slist_.begin();
   while(true)
   {
+   if(slist_.empty())
+   {slist_.push_back(pm); continue;
+   }
+   else{
    if (it == slist_.end())
    {
   	slist_.push_back(pm);
@@ -40,6 +44,7 @@ void PMMinList::push(PuzzleMove* pm)
    {
   	slist_.insert(it, pm);
   	break;
+   }
    }
    it++;
   }

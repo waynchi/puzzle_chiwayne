@@ -67,14 +67,17 @@ Board::Board(int size, int numInitMoves, int seed )
 /** Default constructor. provide documentation here */
 Board::Board()
 {
-  size_ = 9;
+  size_ = 0;
+  tiles_ = NULL;
+
+  /*size_ = 9;
   tiles_ = new int[size_];
   //int dim = static_cast<int>(sqrt(size_));
   srand(1);
   for(int i=0; i < size_; i++){
     tiles_[i] = i;
   }
-  /*int blankLoc = 0;
+  int blankLoc = 0;
   for(int i=0; i < 10; i++){
     int r = rand()%4;
     int randNeighbor = -1;

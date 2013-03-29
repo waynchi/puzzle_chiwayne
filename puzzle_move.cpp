@@ -26,7 +26,9 @@ PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *parent)
 
   // Destructor
 PuzzleMove::~PuzzleMove()
-{delete prev_;}
+{ 
+ delete b_;
+}
 
   // Compare to PuzzleMoves based on f distance 
 bool PuzzleMove::operator==(const PuzzleMove& p) const
