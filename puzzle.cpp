@@ -7,7 +7,20 @@
 #include "pmminlist.h"
 
 using namespace std;
-
+/** @mainpage CSCI 102 PA #3
+  @section purpose Purpose/Overview
+  The main point of this PA was to create a resizable puzzle. 
+  This puzzle can be played through and solved by the player,
+  but the player can also request a cheat in order to see the moves required to solve it.
+  @section requirements Requirements
+  I am required to make
+  1) a board class that stores boards and handles potential moves.
+  2) a pmminlist class to store PuzzleMoves in order.
+  3) a Puzzlemove class to store new puzzle movements
+  4) a Puzzle Heuristic class that includes Manhattan and OutofPlace
+  5) a Puzzle Solver class to help find the solution sequence
+  6) and finally, a puzzle class (this class) as a main.cpp 
+  */
 int main(int argc, char *argv[])
 {
   if(argc < 3){
@@ -23,10 +36,11 @@ int main(int argc, char *argv[])
   seed = atoi(argv[3]);
 
   Board b(size,initMoves,seed);
-  //PuzzleHeuristic *pm = new ManhattanHeuristic();
+  PuzzleHeuristic *pm = new ManhattanHeuristic();
   //testing out the OutofPlaceHeuristic
-  PuzzleHeuristic *pm = new OutofPlaceHeuristic();
+  //PuzzleHeuristic *pm = new OutofPlaceHeuristic();
   int input;
+  //**** Implement the gameplay here
   while(!b.solved())
   {
   b.printBoard();
@@ -56,7 +70,7 @@ int main(int argc, char *argv[])
   delete pm;
 
 
-  //**** Implement the gameplay here
+  
   
  //Used this to test PMMinlist
  
