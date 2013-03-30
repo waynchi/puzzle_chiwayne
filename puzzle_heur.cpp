@@ -28,10 +28,10 @@ int ManhattanHeuristic::compute(int *tiles, int size)
  for (int i = 0; i < size; i++)
  {
   int temp = tiles[i];
-  int temp2 = 0;
+ 
   if(temp != 0){
   if(temp < i){
-   /*while (temp != i)
+   while (temp != i)
    {
     if(!((temp+dim) >= (i+1)))
     {
@@ -43,7 +43,8 @@ int ManhattanHeuristic::compute(int *tiles, int size)
      temp++;
      count++;
     }
-   }*/
+   }
+   /*int temp2 = 0;
    temp2 = i;
    while (temp2 != temp)
    {
@@ -57,7 +58,7 @@ int ManhattanHeuristic::compute(int *tiles, int size)
      temp2--;
      count++;
     }
-   }
+   }*/
   }
   else if(temp > i){
    while (temp != i)
