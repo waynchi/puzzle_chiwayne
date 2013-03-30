@@ -64,20 +64,18 @@ Board::Board(int size, int numInitMoves, int seed )
 
 
 //Defaulted a board with 9 tiles.
-/** Default constructor. provide documentation here */
+/** Default constructor. Creates a Default Board with 9 tiles. Pre-solved. */
 Board::Board()
 {
-  size_ = 0;
-  tiles_ = NULL;
 
-  /*size_ = 9;
+  size_ = 9;
   tiles_ = new int[size_];
   //int dim = static_cast<int>(sqrt(size_));
   srand(1);
   for(int i=0; i < size_; i++){
     tiles_[i] = i;
   }
-  int blankLoc = 0;
+  /*int blankLoc = 0;
   for(int i=0; i < 10; i++){
     int r = rand()%4;
     int randNeighbor = -1;
@@ -114,6 +112,7 @@ Board::Board()
 }
 
 //copy constructor 
+/** Deep Copy Copy Constructor */
 Board::Board(const Board &b)
 {
 	size_ = b.size_;
@@ -124,7 +123,8 @@ Board::Board(const Board &b)
 	}
 }
 
-//other copy constructor		
+//other copy constructor	
+/** Another Deep Copy Copy Constructor */	
 Board::Board(int *tiles, int size)
 {
 	size_ = size;
@@ -134,11 +134,12 @@ Board::Board(int *tiles, int size)
 		tiles_[i] = tiles[i];
 	}
 }
-/** Default destructor. provide documentation here */
+/** Default destructor. Deletes and returns tiles_ memory to the heap */
 Board::~Board()
 {
   delete []tiles_;
 }
+
 
 void Board::printBoard()
 {

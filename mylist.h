@@ -12,14 +12,25 @@
 using namespace std;
 
 template <typename T>
+/** 
+A basic list that grows as more values are added. Functions similarly to a vector.
+
+@author Wayne Chi
+*/
 class mylist{
 	private:
+	/** The array that stores the variables */
 	T* array;
+	/** The "capacity" or how much the array can currently hold */
 	int size_; //this is the "capacity"
+	/** The location or current place of the largest value/"size" of the array */
 	int loc_;  //this is the "actual size" Sorry for any confusion
 	public:
+	/** Default Constructor. */
 	mylist();
+	/** Constructor when given size */
 	mylist(int size);
+	/** Default Destructor */
 	~mylist();
 	void push_back(T word);
 	int size() const;
@@ -31,6 +42,7 @@ class mylist{
 };
 
 //constructors and destructors
+/** Automatically creates an array of size_ 100 */
 template <typename T>
 mylist<T>::mylist()
 {
@@ -39,6 +51,8 @@ mylist<T>::mylist()
 	array = new T[size_];
 }
 
+/** Allows User to inpute the size
+@param size size_(capacity) of the array */
 template <typename T>
 mylist<T>::mylist(int size)
 {
@@ -46,7 +60,8 @@ mylist<T>::mylist(int size)
 	loc_ = 0;
 	array = new T[size_];
 }
-	
+
+/** Deletes the array and returns the memory */
 template <typename T>
 mylist<T>::~mylist()
 {
@@ -54,6 +69,8 @@ mylist<T>::~mylist()
 }
 
 //pushback function to add variables
+/** Pushback function that adds variables and expands as necessary 
+@param word the variable that is to be added */
 template <typename T>
 void mylist<T>::push_back(T word)
 {
@@ -74,11 +91,14 @@ void mylist<T>::push_back(T word)
 	loc_++;
 }
 
+/** Resets the list by seting loc_ = 0; */
 template <typename T>
 void mylist<T>::reset()
 {
 	loc_ = 0;
 }
+
+/** Returns the loc (size) of the array */
 //size and at functions
 template <typename T>
 int mylist<T>::size() const
@@ -86,12 +106,17 @@ int mylist<T>::size() const
 	return loc_;
 }
 
+/** returns the value at the desired location.
+@param loc The location to look for the item */
+
 template <typename T>
 T& mylist<T>::at(int loc) const
 {
 	return array[loc];
 }
 
+/** operator function for [] to make the mylist more like an array/vector. 
+@param loc The location to look for the item*/
 //[] operator function
 template <typename T>
 T& mylist<T>::operator[](int loc) const
@@ -100,9 +125,10 @@ T& mylist<T>::operator[](int loc) const
 }
 
 
-// If "val" occurs in the list, remove the first
-// occurrence of "val" and return true. Throws an
-// error otherwise.
+/** If "val" occurs in the list, remove the first
+occurrence of "val" and return true. Throws an
+error otherwise.
+@param val The value to be searched for and removed within the array*/
 template <typename T>
 bool mylist<T>::remove(T val)
 {

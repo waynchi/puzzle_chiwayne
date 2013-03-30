@@ -9,7 +9,11 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <cmath>
+/**
+A Board Class that creates a Board object which stores tiles, can scramble the board, and can generate potential moves.
 
+@author Wayne Chi
+*/
 class Board
 {
  public:
@@ -30,10 +34,14 @@ class Board
   /** Destructor */
   ~Board();
 
-  /** Swaps the blank with the specified tile */
+  /** Swaps the blank with the specified tile 
+   *  @param tile The tile that is to be swapped
+  */
+  
   void move(int tile);
   
   //Prints out the current board
+  /** Prints out the current Board */
   void printBoard();
 
   /** Generate potential moves and returns new boards
@@ -48,19 +56,28 @@ class Board
 
 
   // Operators
+  /** Friend operator in order to print out the board */ 
   friend std::ostream& operator<<(std::ostream &os, const Board &b);
+  /** Equals comparison for Board */
   bool operator==(const Board& rhs) const;
+  /** Less than comparison for Board */
   bool operator<(const Board& rhs) const;
+  /** Does not Equal comparison for Board */
   bool operator!=(const Board& rhs) const;
   
-  // Accessors
+  // Accessors 
+  /** Accesses the Board's Tiles */
   int* getTiles();
+  /** Accesses the Board's Size */
   int getSize();
   // Add any accessors
 
 
  private:
+ 
+  /** The tiles of the board */
   int *tiles_;
+  /** The size (amount of tiles) of the board */
   int size_;
   // Add Data members
 
