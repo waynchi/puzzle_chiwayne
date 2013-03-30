@@ -59,17 +59,23 @@ int main(int argc, char *argv[])
   
  //Used this to test PMMinlist
  
- /*Board a(9,5,200);
- Board b(9,15,200);
- Board c(9,20,200);
- Board d(9,35,200);
- Board e(9,1,200);
+ /*Board a(16,50,200);
+ Board b(16,150,300);
+ Board c(16,30,600);
+ Board d(16,20,800);
+ Board e(16,74,10000);
+ PuzzleHeuristic *pm = new ManhattanHeuristic();
 
  PuzzleMove *v = new PuzzleMove(a);
+ v->h_ = pm->compute(v->b_->getTiles(), v->b_->getSize());
  PuzzleMove *w = new PuzzleMove(b);
+ w->h_ = pm->compute(w->b_->getTiles(), w->b_->getSize());
  PuzzleMove *x = new PuzzleMove(c);
+ x->h_ = pm->compute(x->b_->getTiles(), x->b_->getSize());
  PuzzleMove *y = new PuzzleMove(d);
+ y->h_ = pm->compute(y->b_->getTiles(), y->b_->getSize());
  PuzzleMove *z = new PuzzleMove(e);
+ z->h_ = pm->compute(z->b_->getTiles(), z->b_->getSize());
 
  PMMinList mlist; 
 
