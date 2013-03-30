@@ -40,7 +40,6 @@ Cleanup and return appropriate values*/
 //ALL MEMORY LEAKS ARE CLOSED
 int PuzzleSolver::run(PuzzleHeuristic *ph)
 {
-
  int count = 0;
  PMMinList openlist;
  vector<PuzzleMove*> garbage;
