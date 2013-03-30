@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     cout << solver.getSequence().at(j) << " ";
    }
    cout << " " << endl;
-   cout << "(Expansions) = " << solver.getNumExpansions() << endl;
+   cout << "(Expansions = " << solver.getNumExpansions() << ")" << endl;
    cout << " " << endl;
   }
   else
