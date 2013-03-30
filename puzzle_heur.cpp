@@ -37,22 +37,22 @@ int ManhattanHeuristic::compute(int *tiles, int size)
      temp+=dim;
      count++;
     }
-    if(!((temp+1)>i))
+    else //if(!((temp+1)>i))
     {
      temp++;
      count++;
     }
    }
   }
-  if(temp > i){
+  else if(temp > i){
    while (temp != i)
    {
     if(((temp-dim) >= i))
     {
      temp+=-dim;
      count++;
-    }
-    if((temp-1)>=i)
+    } 
+    else //if((temp-1)>=i)
     {
      temp--;
      count++;

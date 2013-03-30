@@ -84,7 +84,6 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
     temp->h_ = ph->compute(temp->b_->getTiles(), temp->b_->getSize());
     if(closedlist.find(temp->b_) == closedlist.end())
     {
-    
      openlist.push(temp);
      closedlist.insert(temp->b_);
      expansions_++;
