@@ -244,6 +244,7 @@ std::map<int, Board*> Board::potentialMoves()
 			tempBoard->move(neighbors[j]);
 			BoardList[neighbors[j]] = tempBoard;
 		}
+		else{ delete tempBoard;}
 				
 	}
 	return BoardList;

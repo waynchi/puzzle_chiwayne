@@ -19,15 +19,14 @@ PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *parent)
 {
 	tileMove_ = tile;
 	prev_ = parent;
-	b_ = b;
+	b_ = new Board(*b);
 	g_ = (parent->g_)+1;
 	h_ = -1;
 }
 
   // Destructor
 PuzzleMove::~PuzzleMove()
-{ 
- delete b_;
+{
 }
 
   // Compare to PuzzleMoves based on f distance 
