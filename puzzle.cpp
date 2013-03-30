@@ -23,8 +23,9 @@ int main(int argc, char *argv[])
   seed = atoi(argv[3]);
 
   Board b(size,initMoves,seed);
-  PuzzleHeuristic *pm = new ManhattanHeuristic();
-  
+  //PuzzleHeuristic *pm = new ManhattanHeuristic();
+  //testing out the OutofPlaceHeuristic
+  PuzzleHeuristic *pm = new OutofPlaceHeuristic();
   int input;
   while(!b.solved())
   {
