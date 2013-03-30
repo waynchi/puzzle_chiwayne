@@ -36,6 +36,8 @@ while(open_list is not empty and no solution has been found)
         Add s to the open_list
         Increment number of expansions
 Cleanup and return appropriate values*/
+
+//ALL MEMORY LEAKS ARE CLOSED
 int PuzzleSolver::run(PuzzleHeuristic *ph)
 {
 
