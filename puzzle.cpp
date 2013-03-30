@@ -29,18 +29,20 @@ int main(int argc, char *argv[])
   while(!b.solved())
   {
   b.printBoard();
-  cout << "Please enter the number you would like to move. Enter -1 if you would like a cheat." << endl;
+  cout << "Enter tile number to move or -1 for a cheat:  ";
   cin >> input;
+  cout << " " << endl;
   if(input == -1)
   {
    PuzzleSolver solver(b);
    int count = solver.run(pm);
-   cout << "Number of Expansions:" << solver.getNumExpansions() << endl;
-   cout << "Sequence: ";
+   cout << "Try this sequence:  ";
    for(int j = (count-1); j >=0; j--)
    {
     cout << solver.getSequence().at(j) << " ";
    }
+   cout << " " << endl;
+   cout << "(Explansions) = " << solver.getNumExpansions() << endl;
    cout << " " << endl;
   }
   else
