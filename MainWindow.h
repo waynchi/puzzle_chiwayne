@@ -25,6 +25,8 @@
 #include <QGraphicsSimpleTextItem>
 #include <QGraphicsItemGroup>
 #include <QString>
+#include "puzzle_solver.h"
+#include "puzzle_heur.h"
 #define WINDOW_MAX_X 200
 #define WINDOW_MAX_Y 150
 
@@ -38,6 +40,7 @@ public:
     ~MainWindow();
     void moveTile(GUITile *guitile);
     void show();
+    void displayAlg();
     
 private:
     QGraphicsScene *scene;
@@ -53,6 +56,8 @@ private:
     QLineEdit *lineEdit3;
     QGraphicsScene *botscene;
     QGraphicsView *botview;
+    QRadioButton *OutofPlaceButton;
+    QRadioButton *ManhattanButton;
 
 public slots:
     void quit();

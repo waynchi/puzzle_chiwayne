@@ -25,8 +25,8 @@ MainWindow::MainWindow()  {
     QLabel *seedLabel = new QLabel("Seed",this);
     QPushButton *startButton = new QPushButton("&Start",this);
     QPushButton *quitButton = new QPushButton("&Quit", this);
-    QRadioButton *OutofPlaceButton = new QRadioButton("OutofPlace Heuristic", this);
-    QRadioButton *ManhattanButton = new QRadioButton("Manhattan Heuristic", this);
+    OutofPlaceButton = new QRadioButton("OutofPlace Heuristic", this);
+    ManhattanButton = new QRadioButton("Manhattan Heuristic", this);
     
   
     QFormLayout *formLayout = new QFormLayout;
@@ -64,6 +64,18 @@ void MainWindow::quit() {
     exit(1);
 }
 
+void MainWindow::displayAlg() {
+
+	if(OutofPlaceButton->isChecked())
+	{
+		PuzzleHeuristic *pm = new OutofPlaceHeuristic();
+	}
+	else if(ManhattanButton->isChecked())
+	{
+		PuzzleHeuristic *pm = new ManhattanHeuristic();
+	}
+
+}
 void MainWindow::moveTile(GUITile *guitile){
 	//moves tiles.
 	int temp = 0;
@@ -110,20 +122,26 @@ void MainWindow::moveTile(GUITile *guitile){
 		{
 			//swap(tilevector[tempzero],tilevector[temp]);
 			
+			b->getTiles()[tempzero] = guitile->tile_;
+			b->getTiles()[temp] = 0;
+			
 			tilevector[tempzero]->tile_ = guitile->tile_;
 			tilevector[temp]->tile_ = 0;
 			QPointF p((tilevector[tempzero]->x),(tilevector[tempzero]->y));
 			QPointF p2((tilevector[temp]->x),(tilevector[temp]->y));
-			//QPointF p3((tilevector[tempzero]->x + 25),(25 +tilevector[tempzero]->y));
-			//QPointF p4((tilevector[temp]->x + 25),(tilevector[temp]->y + 25));
+			QPointF p3((tilevector[tempzero]->x + 25),(25 +tilevector[tempzero]->y));
+			QPointF p4((tilevector[temp]->x + 25),(tilevector[temp]->y + 25));
 			QRectF r( tilevector[temp]->rect() );
 			QRectF r2( tilevector[tempzero]->rect() );
    			r.moveTo(p);
-   			//tilevector[temp]->text->setPos(p3);
-   			//tilevector[tempzero]->text->setPos(p4);
+   			tilevector[temp]->text->setPos(p3);
+   			tilevector[tempzero]->text->setPos(p4);
    			r2.moveTo(p2);
    			
    			
+   			
+   			tilevector[temp]->text->setPos(p4);
+   			tilevector[tempzero]->text->setPos(p3);
 			ss << tilevector[tempzero]->tile_;
 			s = ss.str();
 			tilevector[tempzero]->text->setText(s.c_str());
@@ -135,7 +153,13 @@ void MainWindow::moveTile(GUITile *guitile){
 			break;
 		}
 	}
- 
+ 	if(b->solved())
+ 	{
+ 		scene->clear();
+ 		botscene->clear();
+    		QGraphicsSimpleTextItem *victory = new QGraphicsSimpleTextItem("You Win!");
+    		botscene->addItem(victory);
+    	}
 }
 
 void MainWindow::start(){
