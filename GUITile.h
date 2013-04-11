@@ -21,22 +21,23 @@
 #include "board.h"
 #include <QGraphicsRectItem>
 
-
+class MainWindow;
 class GUITile : public QGraphicsRectItem{
 
 public:
 
-	GUITile(double nx, double ny, double w, double h);
+	GUITile(double nx, double ny, double w, double h, int tile, MainWindow *gWindow);
+	~GUITile();
 	double x;
 	double y;
 	double width;
 	double height;
-	QGraphicsSimpleTextItem *item;
-	void mousePressEvent();
+	QGraphicsSimpleTextItem *text;
+	int tile_;
+	MainWindow *gWindow_;
+	void mousePressEvent ( QGraphicsSceneMouseEvent* event );
 	
 	
-
-
 
 
 

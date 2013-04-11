@@ -13,15 +13,20 @@
 #include <QLabel>
 #include <QGraphicsItemAnimation>
 #include <QPushButton>
+#include <QIntValidator>
 #include <vector>
 #include <QLayout>
 #include <QLineEdit>
 #include <iostream>
 #include "GUITile.h"
 #include "board.h"
-
-#define WINDOW_MAX_X 250
-#define WINDOW_MAX_Y 250
+#include <string>
+#include <sstream>
+#include <QGraphicsSimpleTextItem>
+#include <QGraphicsItemGroup>
+#include <QString>
+#define WINDOW_MAX_X 200
+#define WINDOW_MAX_Y 150
 
 using namespace std;
 
@@ -31,7 +36,7 @@ class MainWindow : public QWidget {
 public:
     explicit MainWindow();
     ~MainWindow();
-    void moveTile();
+    void moveTile(GUITile *guitile);
     void show();
     
 private:
@@ -42,9 +47,16 @@ private:
     Board *b;
     vector<GUITile*> tilevector;
     GUITile *tile;
+    int size_;
+    QLineEdit *lineEdit1;
+    QLineEdit *lineEdit2;
+    QLineEdit *lineEdit3;
+    QGraphicsScene *botscene;
+    QGraphicsView *botview;
 
 public slots:
     void quit();
+    void start();
 };
 
 #endif// MAINWINDOW_H
