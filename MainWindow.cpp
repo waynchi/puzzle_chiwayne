@@ -4,7 +4,7 @@
 
 MainWindow::MainWindow()  {
     //We need a scene and a view to do graphics in QT
-    
+    count = 0;
     scene = new QGraphicsScene();
     view = new QGraphicsView( scene );
     botscene = new QGraphicsScene();
@@ -50,10 +50,23 @@ MainWindow::MainWindow()  {
     formLayout->addRow(turnLabel, lineEdit2);
     formLayout->addRow(seedLabel, lineEdit3);
     window->setLayout(VBoxLayout);
+    timer = new QTimer(this);
+    timer->setInterval(5);
     connect(quitButton, SIGNAL(clicked()), this, SLOT(quit()));
     connect(startButton, SIGNAL(clicked()), this, SLOT(start()));
     connect(AlgButton, SIGNAL(clicked()), this, SLOT(displayAlg()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
        
+}
+
+void MainWindow::handleTimer() {
+	count++;
+	if(count == 51)
+	{
+		timer->stop();
+		count = 0;
+		return;
+	}
 }
 
 void MainWindow::show() {
@@ -152,8 +165,6 @@ void MainWindow::moveTile(GUITile *guitile){
 	{
 		if(neighbors[j] == 0)
 		{
-			//swap(tilevector[tempzero],tilevector[temp]);
-			
 			b->getTiles()[tempzero] = guitile->tile_;
 			b->getTiles()[temp] = 0;
 			

@@ -51,6 +51,7 @@ private:
     vector<GUITile*> tilevector;
     GUITile *tile;
     int size_;
+    int count;
     QLineEdit *lineEdit1;
     QLineEdit *lineEdit2;
     QLineEdit *lineEdit3;
@@ -63,6 +64,7 @@ public slots:
     void quit();
     void start();
     void displayAlg();
+    void handleTimer();
 };
 
 #endif// MAINWINDOW_H
