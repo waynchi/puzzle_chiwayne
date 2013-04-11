@@ -65,6 +65,7 @@ void MainWindow::quit() {
 }
 
 void MainWindow::moveTile(GUITile *guitile){
+	//moves tiles.
 	int temp = 0;
 	int tempzero = 0;
 	stringstream ss;
