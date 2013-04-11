@@ -59,10 +59,10 @@ void MainWindow::show() {
     
 }
 
-/*void MainWindow::quit() {
+void MainWindow::quit() {
 
     exit(1);
-}*/
+}
 
 void MainWindow::moveTile(GUITile *guitile){
 	int temp = 0;
