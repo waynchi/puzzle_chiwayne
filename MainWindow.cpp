@@ -69,6 +69,15 @@ void MainWindow::quit() {
 }
 
 void MainWindow::displayAlg() {
+	if(tilevector.size() < 5)
+	{
+		botscene->clear();
+    		QGraphicsSimpleTextItem *error5 = new QGraphicsSimpleTextItem("You must first generate a Board.");
+    		botscene->addItem(error5);
+    		return;
+    	}
+    	else
+    	{	
 	stringstream ss;
 	string s;
 	PuzzleHeuristic *pm;
@@ -96,6 +105,7 @@ void MainWindow::displayAlg() {
    	botscene->clear();
     	QGraphicsSimpleTextItem *Alg = new QGraphicsSimpleTextItem(s.c_str());
     	botscene->addItem(Alg);
+    	}
 
 }
 void MainWindow::moveTile(GUITile *guitile){
