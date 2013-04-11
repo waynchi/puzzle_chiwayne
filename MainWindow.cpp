@@ -138,7 +138,7 @@ void MainWindow::moveTile(GUITile *guitile){
 }
 
 void MainWindow::start(){
-//QIntValidator()
+    //checks to see if three values are inputted
     if((lineEdit1->text().isEmpty())||(lineEdit2->text().isEmpty())||(lineEdit3->text().isEmpty()))
     {
     	botscene->clear();
@@ -154,6 +154,7 @@ void MainWindow::start(){
     stringstream ss;
     string s;
     botscene->clear();
+    //checks to see if the size input is valid
     if(!(lineEdit1->text().toInt() == 9||lineEdit1->text().toInt() == 16))
     {
         QGraphicsSimpleTextItem *error1 = new QGraphicsSimpleTextItem("You must enter either 9 or 16 as the size");
@@ -164,6 +165,7 @@ void MainWindow::start(){
     {
         size_ = lineEdit1->text().toInt();
     }
+    //checks to see if the initial value input is valid
     if(lineEdit2->text().toInt()<0)
     {
         QGraphicsSimpleTextItem *error2 = new QGraphicsSimpleTextItem("You must enter a positive number");
@@ -172,6 +174,7 @@ void MainWindow::start(){
     }
     else{
     init_ = lineEdit2->text().toInt();}
+    //checks to see if the seed input is valid
     if(lineEdit3->text().toInt()<0){
         QGraphicsSimpleTextItem *error3 = new QGraphicsSimpleTextItem("You must enter a positive number");
     	botscene->addItem(error3);
