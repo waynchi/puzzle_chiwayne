@@ -27,28 +27,32 @@ MainWindow::MainWindow()  {
     QPushButton *quitButton = new QPushButton("&Quit", this);
     OutofPlaceButton = new QRadioButton("OutofPlace Heuristic", this);
     ManhattanButton = new QRadioButton("Manhattan Heuristic", this);
+    QPushButton *AlgButton = new QPushButton("&Cheat!", this);
     
   
     QFormLayout *formLayout = new QFormLayout;
     QHBoxLayout *HBoxLayout = new QHBoxLayout;
     QHBoxLayout *HBoxLayout2 = new QHBoxLayout;
+    QHBoxLayout *HBoxLayout3 = new QHBoxLayout;
     QVBoxLayout *VBoxLayout = new QVBoxLayout;
     HBoxLayout->addWidget(startButton);
     HBoxLayout->addWidget(quitButton);
     HBoxLayout2->addWidget(OutofPlaceButton);
     HBoxLayout2->addWidget(ManhattanButton);
+    HBoxLayout3->addWidget(AlgButton);
     VBoxLayout->addLayout(HBoxLayout);
     VBoxLayout->addLayout(formLayout);
     VBoxLayout->addLayout(HBoxLayout2);
     VBoxLayout->addWidget(view);
-    VBoxLayout->addWidget(botview);
+    VBoxLayout->addLayout(HBoxLayout3);
+    HBoxLayout3->addWidget(botview);
     formLayout->addRow(sizeLabel, lineEdit1);
     formLayout->addRow(turnLabel, lineEdit2);
     formLayout->addRow(seedLabel, lineEdit3);
     window->setLayout(VBoxLayout);
     connect(quitButton, SIGNAL(clicked()), this, SLOT(quit()));
     connect(startButton, SIGNAL(clicked()), this, SLOT(start()));
-    
+    connect(AlgButton, SIGNAL(clicked()), this, SLOT(displayAlg()));
        
 }
 
@@ -65,15 +69,33 @@ void MainWindow::quit() {
 }
 
 void MainWindow::displayAlg() {
-
+	stringstream ss;
+	string s;
+	PuzzleHeuristic *pm;
 	if(OutofPlaceButton->isChecked())
 	{
-		PuzzleHeuristic *pm = new OutofPlaceHeuristic();
+		pm = new OutofPlaceHeuristic();
 	}
 	else if(ManhattanButton->isChecked())
 	{
-		PuzzleHeuristic *pm = new ManhattanHeuristic();
+		pm = new ManhattanHeuristic();
 	}
+	else{
+		botscene->clear();
+    		QGraphicsSimpleTextItem *error4 = new QGraphicsSimpleTextItem("You must check a box!");
+    		botscene->addItem(error4);
+    		return;
+	}
+	PuzzleSolver solver(*b);
+   	int count = solver.run(pm);
+   	for(int j = (count-1); j >=0; j--)
+   	{
+   		ss << solver.getSequence().at(j) << " ";
+   	}
+   	s = ss.str();
+   	botscene->clear();
+    	QGraphicsSimpleTextItem *Alg = new QGraphicsSimpleTextItem(s.c_str());
+    	botscene->addItem(Alg);
 
 }
 void MainWindow::moveTile(GUITile *guitile){
@@ -155,6 +177,11 @@ void MainWindow::moveTile(GUITile *guitile){
 	}
  	if(b->solved())
  	{
+ 		for(unsigned int i = 0; i < tilevector.size(); i++)
+   		{
+ 			delete tilevector[i];
+   		}
+   		tilevector.clear();
  		scene->clear();
  		botscene->clear();
     		QGraphicsSimpleTextItem *victory = new QGraphicsSimpleTextItem("You Win!");

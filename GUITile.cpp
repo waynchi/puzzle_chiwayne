@@ -17,5 +17,6 @@ GUITile::~GUITile()
 
 void GUITile::mousePressEvent ( QGraphicsSceneMouseEvent* event ) {
 gWindow_->moveTile( this );
+event = event;
 }
 

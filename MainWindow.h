@@ -40,7 +40,7 @@ public:
     ~MainWindow();
     void moveTile(GUITile *guitile);
     void show();
-    void displayAlg();
+
     
 private:
     QGraphicsScene *scene;
@@ -62,6 +62,7 @@ private:
 public slots:
     void quit();
     void start();
+    void displayAlg();
 };
 
 #endif// MAINWINDOW_H
