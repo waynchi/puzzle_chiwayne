@@ -73,6 +73,7 @@ void MainWindow::quit() {
     exit(1);
 }
 
+//This correctly outputs the A* algorithm onto the screen
 void MainWindow::displayAlg() {
 	if(tilevector.size() < 5)
 	{
