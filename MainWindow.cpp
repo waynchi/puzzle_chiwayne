@@ -163,37 +163,91 @@ void MainWindow::moveTile(GUITile *guitile){
 	else{neighbors[3] = -1;}
 	for (int j = 0; j < 4; j++)
 	{
+		cout<< "testing" << endl;
 		if(neighbors[j] == 0)
 		{
 			b->getTiles()[tempzero] = guitile->tile_;
 			b->getTiles()[temp] = 0;
 			
-			tilevector[tempzero]->tile_ = guitile->tile_;
-			tilevector[temp]->tile_ = 0;
-			QPointF p((tilevector[tempzero]->x),(tilevector[tempzero]->y));
-			QPointF p2((tilevector[temp]->x),(tilevector[temp]->y));
-			QPointF p3((tilevector[tempzero]->x + 25),(25 +tilevector[tempzero]->y));
-			QPointF p4((tilevector[temp]->x + 25),(tilevector[temp]->y + 25));
 			QRectF r( tilevector[temp]->rect() );
 			QRectF r2( tilevector[tempzero]->rect());
-   			r.moveTo(p);
-   			tilevector[temp]->text->setPos(p3);
-   			tilevector[tempzero]->text->setPos(p4);
-   			r2.moveTo(p2);
-   			
-   			
-   			
-   			
-   			
-   			tilevector[temp]->text->setPos(p4);
-   			tilevector[tempzero]->text->setPos(p3);
-			ss << tilevector[tempzero]->tile_;
-			s = ss.str();
-			tilevector[tempzero]->text->setText(s.c_str());
-			tilevector[temp]->text->setText("");
 			
-			//tilevector[tempzero]->setPos(p2);
-    			//tilevector[temp]->setPos(p);
+			if(j==0)
+			{
+				tilevector[temp]->y -=50;
+				tilevector[tempzero]->y +=50;
+				
+				QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+				QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
+				r.moveTo(p);
+				r2.moveTo(p2);
+				tilevector[temp]->setRect( r );
+				tilevector[tempzero]->setRect( r2 );
+				
+				QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
+				QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
+				tilevector[temp]->text->setPos(p4);
+   				tilevector[tempzero]->text->setPos(p3);
+				
+				swap(tilevector[temp],tilevector[tempzero]);
+			}
+			if(j==1)
+			{
+				tilevector[temp]->x +=50;
+				tilevector[tempzero]->x -=50;
+				
+				QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+				QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
+				r.moveTo(p);
+				r2.moveTo(p2);
+				tilevector[temp]->setRect( r );
+				tilevector[tempzero]->setRect( r2 );
+				
+				QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
+				QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
+				tilevector[temp]->text->setPos(p4);
+   				tilevector[tempzero]->text->setPos(p3);
+				
+				swap(tilevector[temp],tilevector[tempzero]);
+			}
+			if(j==2)
+			{
+				tilevector[temp]->x -=50;
+				tilevector[tempzero]->x +=50;
+				
+				QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+				QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
+				r.moveTo(p);
+				r2.moveTo(p2);
+				tilevector[temp]->setRect( r );
+				tilevector[tempzero]->setRect( r2 );
+				
+				QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
+				QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
+				tilevector[temp]->text->setPos(p4);
+   				tilevector[tempzero]->text->setPos(p3);
+				
+				swap(tilevector[temp],tilevector[tempzero]);
+			}
+			if(j==3)
+			{
+				tilevector[temp]->y +=50;
+				tilevector[tempzero]->y -=50;
+				
+				QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+				QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
+				r.moveTo(p);
+				r2.moveTo(p2);
+				tilevector[temp]->setRect( r );
+				tilevector[tempzero]->setRect( r2 );
+				
+				QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
+				QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
+				tilevector[temp]->text->setPos(p4);
+   				tilevector[tempzero]->text->setPos(p3);
+				
+				swap(tilevector[temp],tilevector[tempzero]);
+			}
 			
 			break;
 		}
