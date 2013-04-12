@@ -59,15 +59,7 @@ MainWindow::MainWindow()  {
        
 }
 
-void MainWindow::handleTimer() {
-	count++;
-	if(count == 51)
-	{
-		timer->stop();
-		count = 0;
-		return;
-	}
-}
+
 
 void MainWindow::show() {
 
@@ -121,10 +113,56 @@ void MainWindow::displayAlg() {
     	}
 
 }
+
+void MainWindow::handleTimer() {
+	count++;
+	if(count == 51)
+	{
+		timer->stop();
+		count = 0;
+		if(b->solved())
+ 		{
+ 			for(unsigned int i = 0; i < tilevector.size(); i++)
+   			{
+ 				delete tilevector[i];
+   			}
+   		tilevector.clear();
+ 		scene->clear();
+ 		botscene->clear();
+    		QGraphicsSimpleTextItem *victory = new QGraphicsSimpleTextItem("You Win!");
+    		botscene->addItem(victory);
+    		}
+		return;
+	}
+	
+	QRectF r( tilevector[temp]->rect() );
+	QRectF r2( tilevector[tempzero]->rect());
+	tilevector[temp]->y -=velocityY;
+	tilevector[temp]->x -=velocityX;
+	tilevector[tempzero]->y += velocityY;
+	tilevector[tempzero]->x += velocityX;
+	
+	QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+	QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
+	r.moveTo(p);
+	r2.moveTo(p2);
+	tilevector[temp]->setRect( r );
+	tilevector[tempzero]->setRect( r2 );
+	
+	QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
+	QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
+	tilevector[temp]->text->setPos(p4);
+   	tilevector[tempzero]->text->setPos(p3);
+	
+}
+
 void MainWindow::moveTile(GUITile *guitile){
 	//moves tiles.
-	int temp = 0;
-	int tempzero = 0;
+	if(timer->isActive())
+	{}
+	else{
+	temp = 0;
+	tempzero = 0;
 	stringstream ss;
     	string s;
 	int dim = static_cast<int>(sqrt(size_));
@@ -163,21 +201,19 @@ void MainWindow::moveTile(GUITile *guitile){
 	else{neighbors[3] = -1;}
 	for (int j = 0; j < 4; j++)
 	{
-		cout<< "testing" << endl;
 		if(neighbors[j] == 0)
 		{
 			b->getTiles()[tempzero] = guitile->tile_;
 			b->getTiles()[temp] = 0;
 			
-			QRectF r( tilevector[temp]->rect() );
-			QRectF r2( tilevector[tempzero]->rect());
-			
 			if(j==0)
 			{
-				tilevector[temp]->y -=50;
-				tilevector[tempzero]->y +=50;
+				//tilevector[temp]->y -=50;
+				//tilevector[tempzero]->y +=50;
+				velocityX = 0;
+				velocityY = -1;
 				
-				QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+				/*QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
 				QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
 				r.moveTo(p);
 				r2.moveTo(p2);
@@ -187,16 +223,19 @@ void MainWindow::moveTile(GUITile *guitile){
 				QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
 				QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
 				tilevector[temp]->text->setPos(p4);
-   				tilevector[tempzero]->text->setPos(p3);
+   				tilevector[tempzero]->text->setPos(p3);*/
+   				timer->start();
 				
 				swap(tilevector[temp],tilevector[tempzero]);
 			}
 			if(j==1)
 			{
-				tilevector[temp]->x +=50;
-				tilevector[tempzero]->x -=50;
+				//tilevector[temp]->x +=50;
+				//tilevector[tempzero]->x -=50;
+				velocityX = 1;
+				velocityY = 0;
 				
-				QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+				/*QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
 				QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
 				r.moveTo(p);
 				r2.moveTo(p2);
@@ -206,16 +245,19 @@ void MainWindow::moveTile(GUITile *guitile){
 				QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
 				QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
 				tilevector[temp]->text->setPos(p4);
-   				tilevector[tempzero]->text->setPos(p3);
+   				tilevector[tempzero]->text->setPos(p3);*/
+   				timer->start();
 				
 				swap(tilevector[temp],tilevector[tempzero]);
 			}
 			if(j==2)
 			{
-				tilevector[temp]->x -=50;
-				tilevector[tempzero]->x +=50;
+				//tilevector[temp]->x -=50;
+				//tilevector[tempzero]->x +=50;
+				velocityX = -1;
+				velocityY = 0;
 				
-				QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+				/*QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
 				QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
 				r.moveTo(p);
 				r2.moveTo(p2);
@@ -225,16 +267,19 @@ void MainWindow::moveTile(GUITile *guitile){
 				QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
 				QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
 				tilevector[temp]->text->setPos(p4);
-   				tilevector[tempzero]->text->setPos(p3);
+   				tilevector[tempzero]->text->setPos(p3);*/
+   				timer->start();
 				
 				swap(tilevector[temp],tilevector[tempzero]);
 			}
 			if(j==3)
 			{
-				tilevector[temp]->y +=50;
-				tilevector[tempzero]->y -=50;
+				//tilevector[temp]->y +=50;
+				//tilevector[tempzero]->y -=50;
+				velocityX = 0;
+				velocityY = 1;
 				
-				QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
+				/*QPointF p((tilevector[temp]->x),(tilevector[temp]->y));
 				QPointF p2((tilevector[tempzero]->x),(tilevector[tempzero]->y));
 				r.moveTo(p);
 				r2.moveTo(p2);
@@ -244,26 +289,15 @@ void MainWindow::moveTile(GUITile *guitile){
 				QPointF p3((tilevector[tempzero]->x+25),(tilevector[tempzero]->y+25));
 				QPointF p4((tilevector[temp]->x+25),(tilevector[temp]->y+25));
 				tilevector[temp]->text->setPos(p4);
-   				tilevector[tempzero]->text->setPos(p3);
-				
+   				tilevector[tempzero]->text->setPos(p3);*/
+				timer->start();
 				swap(tilevector[temp],tilevector[tempzero]);
 			}
 			
 			break;
 		}
 	}
- 	if(b->solved())
- 	{
- 		for(unsigned int i = 0; i < tilevector.size(); i++)
-   		{
- 			delete tilevector[i];
-   		}
-   		tilevector.clear();
- 		scene->clear();
- 		botscene->clear();
-    		QGraphicsSimpleTextItem *victory = new QGraphicsSimpleTextItem("You Win!");
-    		botscene->addItem(victory);
-    	}
+	}
 }
 
 void MainWindow::start(){

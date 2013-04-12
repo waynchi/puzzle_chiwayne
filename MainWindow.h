@@ -52,6 +52,10 @@ private:
     GUITile *tile;
     int size_;
     int count;
+    int velocityX;
+    int velocityY;
+    int temp;
+    int tempzero;
     QLineEdit *lineEdit1;
     QLineEdit *lineEdit2;
     QLineEdit *lineEdit3;
