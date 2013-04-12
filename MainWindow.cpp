@@ -131,34 +131,34 @@ void MainWindow::moveTile(GUITile *guitile){
 	int neighbors[4];
 	for (int a = 0; a <size_; a++)
 	{
-		if(tilevector[a]->tile_ == 0)
+		if(b->getTiles()[a] == 0)
 		{ tempzero = a; 
 		break;}
 	}
 	for (int i = 0; i < size_; i++)
 	{
-		if(tilevector[i]->tile_  == guitile->tile_)
+		if(b->getTiles()[i]  == guitile->tile_)
 		{		temp = i;
 		break;}
 	}
 	if (temp >= dim)
 	{
-		neighbors[0] = tilevector[temp-dim]->tile_;
+		neighbors[0] = b->getTiles()[temp-dim];
 	}
 	else{neighbors[0] = -1;}
 	if ((temp+1)%dim != 0)
 	{
-		neighbors[1] = tilevector[temp+1]->tile_;
+		neighbors[1] = b->getTiles()[temp+1];
 	}
 	else{neighbors[1] = -1;}
 	if (temp%dim != 0)
 	{
-		neighbors[2] = tilevector[temp-1]->tile_;
+		neighbors[2] = b->getTiles()[temp-1];
 	}
 	else{neighbors[2] = -1;}
 	if (temp < (size_ - dim))
 	{
-		neighbors[3] = tilevector[temp+dim]->tile_;
+		neighbors[3] = b->getTiles()[temp+dim];
 	}
 	else{neighbors[3] = -1;}
 	for (int j = 0; j < 4; j++)
@@ -175,11 +175,13 @@ void MainWindow::moveTile(GUITile *guitile){
 			QPointF p3((tilevector[tempzero]->x + 25),(25 +tilevector[tempzero]->y));
 			QPointF p4((tilevector[temp]->x + 25),(tilevector[temp]->y + 25));
 			QRectF r( tilevector[temp]->rect() );
-			QRectF r2( tilevector[tempzero]->rect() );
+			QRectF r2( tilevector[tempzero]->rect());
    			r.moveTo(p);
    			tilevector[temp]->text->setPos(p3);
    			tilevector[tempzero]->text->setPos(p4);
    			r2.moveTo(p2);
+   			
+   			
    			
    			
    			
@@ -276,7 +278,7 @@ void MainWindow::start(){
 	}
 	if(b->getTiles()[i] == 0)
 	{
-		tilevector.push_back(new GUITile(x,y,50,50,b->getTiles()[i],this));
+		tilevector.push_back(new GUITile(x,y,0,0,b->getTiles()[i],this));
 		tilevector[i]->text = new QGraphicsSimpleTextItem("");
 		tilevector[i]->text->setPos(x+25,y+25);
 		scene->addItem( tilevector[i] );
